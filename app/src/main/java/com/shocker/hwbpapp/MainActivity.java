@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shocker.hwbpapp.databinding.ActivityMainBinding;
 
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    private boolean isClick=false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
     //点击按钮执行的方法
     public void OnClickButton(View view) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                testHwBp();
-            }
-        }).start();
+        if (!isClick) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    isClick = true;
+                    testHwBp();
+                }
+            }).start();
+        }else {
+            Toast.makeText(getApplicationContext(),"您已经点击过测试按钮,请重新打开app",Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
