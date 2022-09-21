@@ -26,7 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
     //点击按钮执行的方法
     public void OnClickButton(View view) {
-        testHwBp();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                testHwBp();
+            }
+        }).start();
     }
 
     /**
